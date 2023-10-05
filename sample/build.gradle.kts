@@ -8,8 +8,8 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
 
     implementation(project(":library"))
-    implementation("io.ktor:ktor-server-netty:2.3.4")
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.4")
+    implementation("io.ktor:ktor-server-netty:2.3.5")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.5")
     implementation("io.ktor:ktor-server-call-logging:2.3.5")
     implementation("ch.qos.logback:logback-classic:1.4.11")
     implementation("com.squareup.moshi:moshi-adapters:1.15.0")

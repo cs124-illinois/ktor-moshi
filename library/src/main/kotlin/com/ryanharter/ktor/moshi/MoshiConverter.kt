@@ -18,7 +18,11 @@ import okio.source
 import java.nio.charset.Charset
 
 class MoshiConverter(private val moshi: Moshi = Moshi.Builder().build()) : ContentConverter {
-    override suspend fun deserialize(charset: Charset, typeInfo: TypeInfo, content: ByteReadChannel): Any? {
+    override suspend fun deserialize(
+        charset: Charset,
+        typeInfo: TypeInfo,
+        content: ByteReadChannel,
+    ): Any? {
         return withContext(Dispatchers.IO) {
             moshi.adapter(typeInfo.type.javaObjectType).fromJson(content.toInputStream().source().buffer())
         }

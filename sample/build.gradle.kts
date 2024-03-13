@@ -5,19 +5,19 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 dependencies {
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 
     implementation(project(":library"))
-    implementation("io.ktor:ktor-server-netty:2.3.6")
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.6")
-    implementation("io.ktor:ktor-server-call-logging:2.3.6")
-    implementation("ch.qos.logback:logback-classic:1.4.11")
-    implementation("com.squareup.moshi:moshi-adapters:1.15.0")
-    implementation("com.squareup.moshi:moshi:1.15.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation("io.ktor:ktor-server-netty:2.3.9")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.9")
+    implementation("io.ktor:ktor-server-call-logging:2.3.9")
+    implementation("ch.qos.logback:logback-classic:1.5.3")
+    implementation("com.squareup.moshi:moshi-adapters:1.15.1")
+    implementation("com.squareup.moshi:moshi:1.15.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("com.google.truth:truth:1.1.5")
+    testImplementation("com.google.truth:truth:1.4.2")
 }
 kapt {
     useBuildCache = true

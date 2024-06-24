@@ -1,19 +1,20 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.23" apply false
-    id("org.jmailen.kotlinter") version "4.2.0" apply false
+    kotlin("jvm") version "2.0.0" apply false
+    id("org.jmailen.kotlinter") version "4.4.0" apply false
     id("com.github.ben-manes.versions") version "0.51.0"
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 allprojects {
     group = "org.cs124"
-    version = "2024.3.0"
+    version = "2024.6.0"
 }
 subprojects {
     tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
         }
     }
     tasks.withType<JavaCompile> {

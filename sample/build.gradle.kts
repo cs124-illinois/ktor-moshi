@@ -5,13 +5,14 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 dependencies {
+    val ktorVersion = "2.3.12"
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 
     implementation(project(":library"))
-    implementation("io.ktor:ktor-server-netty:2.3.9")
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.9")
-    implementation("io.ktor:ktor-server-call-logging:2.3.9")
-    implementation("ch.qos.logback:logback-classic:1.5.3")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-server-call-logging:$ktorVersion")
+    implementation("ch.qos.logback:logback-classic:1.5.6")
     implementation("com.squareup.moshi:moshi-adapters:1.15.1")
     implementation("com.squareup.moshi:moshi:1.15.1")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.1")

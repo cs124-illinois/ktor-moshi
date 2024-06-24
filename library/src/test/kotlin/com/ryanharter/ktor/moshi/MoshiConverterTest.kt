@@ -105,7 +105,13 @@ class MoshiConverterTest {
         }
 }
 
-data class Foo(val id: Int, val name: String)
+data class Foo(
+    val id: Int,
+    val name: String,
+)
 
 @JsonClass(generateAdapter = true)
-data class Bar(val id: String, val count: Int)
+data class Bar(
+    val id: String,
+    val count: Int,
+)

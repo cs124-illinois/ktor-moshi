@@ -17,16 +17,17 @@ import okio.buffer
 import okio.source
 import java.nio.charset.Charset
 
-class MoshiConverter(private val moshi: Moshi = Moshi.Builder().build()) : ContentConverter {
+class MoshiConverter(
+    private val moshi: Moshi = Moshi.Builder().build(),
+) : ContentConverter {
     override suspend fun deserialize(
         charset: Charset,
         typeInfo: TypeInfo,
         content: ByteReadChannel,
-    ): Any? {
-        return withContext(Dispatchers.IO) {
+    ): Any? =
+        withContext(Dispatchers.IO) {
             moshi.adapter(typeInfo.type.javaObjectType).fromJson(content.toInputStream().source().buffer())
         }
-    }
 
     override suspend fun serializeNullable(
         contentType: ContentType,
@@ -34,10 +35,12 @@ class MoshiConverter(private val moshi: Moshi = Moshi.Builder().build()) : Conte
         typeInfo: TypeInfo,
         value: Any?,
     ) = TextContent(
-        moshi.adapter(
-            value?.javaClass
-                ?: Any::class.java,
-        ).nullSafe().toJson(value),
+        moshi
+            .adapter(
+                value?.javaClass
+                    ?: Any::class.java,
+            ).nullSafe()
+            .toJson(value),
         contentType.withCharset(charset),
     )
 }

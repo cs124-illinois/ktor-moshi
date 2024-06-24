@@ -64,7 +64,13 @@ fun main() {
 }
 
 @JsonClass(generateAdapter = true)
-data class RatingResponse(val average: Double, val ratings: List<Rating>)
+data class RatingResponse(
+    val average: Double,
+    val ratings: List<Rating>,
+)
 
 @JsonClass(generateAdapter = true)
-data class Rating(val color: String, val rating: Double)
+data class Rating(
+    val color: String,
+    val rating: Double,
+)

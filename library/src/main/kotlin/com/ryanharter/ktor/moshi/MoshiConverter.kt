@@ -29,7 +29,7 @@ class MoshiConverter(
             moshi.adapter(typeInfo.type.javaObjectType).fromJson(content.toInputStream().source().buffer())
         }
 
-    override suspend fun serializeNullable(
+    override suspend fun serialize(
         contentType: ContentType,
         charset: Charset,
         typeInfo: TypeInfo,

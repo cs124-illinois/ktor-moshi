@@ -6,16 +6,16 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 dependencies {
-    val ktorVersion = "2.3.12"
+    val ktorVersion = "3.0.0"
     kaptTest("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
-    implementation("com.squareup.okio:okio:3.9.0")
+    implementation("com.squareup.okio:okio:3.9.1")
 
     testImplementation(kotlin("test"))
-    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation("com.google.truth:truth:1.4.4")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
 tasks {

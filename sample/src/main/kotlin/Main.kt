@@ -1,11 +1,10 @@
 import com.ryanharter.ktor.moshi.moshi
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
-import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond

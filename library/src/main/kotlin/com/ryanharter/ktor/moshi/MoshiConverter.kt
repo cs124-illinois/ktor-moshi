@@ -24,10 +24,9 @@ class MoshiConverter(
         charset: Charset,
         typeInfo: TypeInfo,
         content: ByteReadChannel,
-    ): Any? =
-        withContext(Dispatchers.IO) {
-            moshi.adapter(typeInfo.type.javaObjectType).fromJson(content.toInputStream().source().buffer())
-        }
+    ): Any? = withContext(Dispatchers.IO) {
+        moshi.adapter(typeInfo.type.javaObjectType).fromJson(content.toInputStream().source().buffer())
+    }
 
     override suspend fun serialize(
         contentType: ContentType,

@@ -6,20 +6,20 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 dependencies {
-    val ktorVersion = "3.0.0"
-    kaptTest("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
+    val ktorVersion = "3.0.3"
+    kaptTest("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
-    implementation("com.squareup.okio:okio:3.9.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
+    implementation("com.squareup.okio:okio:3.10.0")
 
     testImplementation(kotlin("test"))
     testImplementation("com.google.truth:truth:1.4.4")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
 tasks {
-    val sourcesJar by creating(Jar::class) {
+    val sourcesJar by registering(Jar::class) {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
@@ -40,9 +40,6 @@ publishing {
 kapt {
     useBuildCache = true
     includeCompileClasspath = false
-}
-kotlin {
-    kotlinDaemonJvmArgs = listOf("-Dfile.encoding=UTF-8")
 }
 publishing {
     publications {

@@ -24,84 +24,82 @@ import kotlin.test.Test
 
 class MoshiConverterTest {
     @Test
-    fun reflection() =
-        testApplication {
-            install(ContentNegotiation) {
-                moshi {
-                    this.add(KotlinJsonAdapterFactory())
-                }
-            }
-            routing {
-                val foo = Foo(id = 42, name = "Foosius")
-                get("/") {
-                    call.respond(foo)
-                }
-                post("/") {
-                    val request = call.receive<Foo>()
-                    val text = request.toString()
-                    call.respond(text)
-                }
-            }
-
-            client.get("/") {
-                header("Accept", "application/json")
-            }.also { response ->
-                assertThat(response.status).isEqualTo(HttpStatusCode.OK)
-                assertThat(response.bodyAsText()).isNotNull()
-                assertThat(response.bodyAsText()).isEqualTo("""{"id":42,"name":"Foosius"}""")
-                assertThat(response.contentType()).isEqualTo(ContentType.Application.Json.withCharset(Charsets.UTF_8))
-            }
-
-            client.post("/") {
-                header("Accept", "application/json")
-                header("Content-Type", "application/json")
-                setBody("""{"id":43,"name":"Finnius"}""")
-            }.also { response ->
-                assertThat(response.status).isEqualTo(HttpStatusCode.OK)
-                assertThat(response.bodyAsText()).isNotNull()
-                assertThat(response.bodyAsText()).isEqualTo("Foo(id=43, name=Finnius)")
-                assertThat(response.contentType()).isEqualTo(ContentType.Text.Plain.withCharset(Charsets.UTF_8))
+    fun reflection() = testApplication {
+        install(ContentNegotiation) {
+            moshi {
+                this.add(KotlinJsonAdapterFactory())
             }
         }
+        routing {
+            val foo = Foo(id = 42, name = "Foosius")
+            get("/") {
+                call.respond(foo)
+            }
+            post("/") {
+                val request = call.receive<Foo>()
+                val text = request.toString()
+                call.respond(text)
+            }
+        }
+
+        client.get("/") {
+            header("Accept", "application/json")
+        }.also { response ->
+            assertThat(response.status).isEqualTo(HttpStatusCode.OK)
+            assertThat(response.bodyAsText()).isNotNull()
+            assertThat(response.bodyAsText()).isEqualTo("""{"id":42,"name":"Foosius"}""")
+            assertThat(response.contentType()).isEqualTo(ContentType.Application.Json.withCharset(Charsets.UTF_8))
+        }
+
+        client.post("/") {
+            header("Accept", "application/json")
+            header("Content-Type", "application/json")
+            setBody("""{"id":43,"name":"Finnius"}""")
+        }.also { response ->
+            assertThat(response.status).isEqualTo(HttpStatusCode.OK)
+            assertThat(response.bodyAsText()).isNotNull()
+            assertThat(response.bodyAsText()).isEqualTo("Foo(id=43, name=Finnius)")
+            assertThat(response.contentType()).isEqualTo(ContentType.Text.Plain.withCharset(Charsets.UTF_8))
+        }
+    }
 
     @Test
-    fun codegen() =
-        testApplication {
-            install(ContentNegotiation) {
-                moshi { }
+    fun codegen() = testApplication {
+        install(ContentNegotiation) {
+            moshi { }
+        }
+        routing {
+            val bar = Bar(id = "bar-123", count = 50)
+            get("/") {
+                call.respond(bar)
             }
-            routing {
-                val bar = Bar(id = "bar-123", count = 50)
-                get("/") {
-                    call.respond(bar)
-                }
-                post("/") {
-                    val request = call.receive<Bar>()
-                    val text = request.toString()
-                    call.respond(text)
-                }
-            }
-
-            client.get("/") {
-                header("Accept", "application/json")
-            }.also { response ->
-                assertThat(response.status).isEqualTo(HttpStatusCode.OK)
-                assertThat(response.bodyAsText()).isNotNull()
-                assertThat(response.bodyAsText()).isEqualTo("""{"id":"bar-123","count":50}""")
-                assertThat(response.contentType()).isEqualTo(ContentType.Application.Json.withCharset(Charsets.UTF_8))
-            }
-
-            client.post("/") {
-                header("Accept", "application/json")
-                header("Content-Type", "application/json")
-                setBody("""{"id":"bar-543","count":-1}""")
-            }.also { response ->
-                assertThat(response.status).isEqualTo(HttpStatusCode.OK)
-                assertThat(response.bodyAsText()).isNotNull()
-                assertThat(response.bodyAsText()).isEqualTo("Bar(id=bar-543, count=-1)")
-                assertThat(response.contentType()).isEqualTo(ContentType.Text.Plain.withCharset(Charsets.UTF_8))
+            post("/") {
+                val request = call.receive<Bar>()
+                val text = request.toString()
+                call.respond(text)
             }
         }
+
+        client.get("/") {
+            header("Accept", "application/json")
+        }.also { response ->
+            assertThat(response.status).isEqualTo(HttpStatusCode.OK)
+            assertThat(response.bodyAsText()).isNotNull()
+            assertThat(response.bodyAsText()).isEqualTo("""{"id":"bar-123","count":50}""")
+            assertThat(response.contentType()).isEqualTo(ContentType.Application.Json.withCharset(Charsets.UTF_8))
+        }
+
+        client.post("/") {
+            header("Accept", "application/json")
+            header("Content-Type", "application/json")
+            setBody("""{"id":"bar-543","count":-1}""")
+        }.also { response ->
+            assertThat(response.status).isEqualTo(HttpStatusCode.OK)
+            assertThat(response.bodyAsText()).isNotNull()
+            assertThat(response.bodyAsText()).isEqualTo("Bar(id=bar-543, count=-1)")
+            assertThat(response.contentType()).isEqualTo(ContentType.Text.Plain.withCharset(Charsets.UTF_8))
+        }
+    }
 }
 
 data class Foo(

@@ -1,18 +1,18 @@
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
     `maven-publish`
     signing
     id("org.jmailen.kotlinter")
+    id("com.google.devtools.ksp")
 }
 dependencies {
-    val ktorVersion = "3.0.3"
-    kaptTest("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
+    val ktorVersion = "3.1.3"
+    kspTest("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
-    implementation("com.squareup.okio:okio:3.10.0")
+    implementation("com.squareup.okio:okio:3.12.0")
 
     testImplementation(kotlin("test"))
     testImplementation("com.google.truth:truth:1.4.4")
@@ -33,13 +33,6 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
-}
-publishing {
-
-}
-kapt {
-    useBuildCache = true
-    includeCompileClasspath = false
 }
 publishing {
     publications {
